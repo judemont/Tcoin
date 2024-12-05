@@ -107,7 +107,7 @@ func printChart(chart [][]float64) {
 		}
 	}
 
-	slc := timeserieslinechart.New(100, 15, timeserieslinechart.WithYRange(minPrice, maxPrice))
+	slc := timeserieslinechart.New(70, 15, timeserieslinechart.WithYRange(minPrice, maxPrice))
 
 	for i := 0; i < len(chart); i++ {
 		slc.Push(timeserieslinechart.TimePoint{Time: time.Unix(int64(chart[i][0]), 0), Value: chart[i][1]})
