@@ -12,6 +12,7 @@ import (
 )
 
 func main() {
+	var chartPeriod string = "24h"
 	var currency = Currency{name: "USD", rate: 1.0, symbol: "$"}
 	var cryptoSymbol string
 	if len(os.Args) <= 1 {
@@ -23,6 +24,10 @@ func main() {
 		os.Exit(0)
 	}
 
+	if slices.Contains(os.Args, "-p") || slices.Contains(os.Args, "--period") {
+		chartPeriod = getArgValue(os.Args, "-p", "--period")
+	}
+
 	cryptoSymbol = os.Args[1]
 
 	var cryptoData, err = getCoinData(cryptoSymbol)
@@ -31,7 +36,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	var cryptoChart, chartErr = getChart(cryptoSymbol, "6m")
+	var cryptoChart, chartErr = getChart(cryptoSymbol, chartPeriod)
 	if chartErr != nil {
 		fmt.Println(chartErr)
 		os.Exit(1)
@@ -117,6 +122,17 @@ func printChart(chart [][]float64) {
 	fmt.Println(style.Render(slc.View()))
 }
 
+func getArgValue(args []string, shortFlag, longFlag string) string {
+	for i, arg := range args {
+		if arg == shortFlag || arg == longFlag {
+			if i+1 < len(args) {
+				return args[i+1]
+			}
+		}
+	}
+	return ""
+}
+
 func printHelp() {
 	fmt.Println(
 		`
@@ -124,9 +140,11 @@ Usage: tcoin <crypto>
 
 Options:
  -h, --help 	 Display this help message
+ -p, --period    Period of the chart (24h, 1w, 1m, 3m, 6m, 1y, all)
 
 Example: tcoin bitcoin
-Example: tcoin eth
+Example: tcoin ethereum -p 1y
+Example: tcoin monero --period 1m
 
  `)
 	os.Exit(0)
