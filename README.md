@@ -4,3 +4,4 @@ TCoin is a command-line interface (CLI) application that retrieves and displays 
 
 
 
+![image](https://github.com/user-attachments/assets/09d6fce6-52ff-4b63-8871-31925be99a81)
