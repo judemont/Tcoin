@@ -42,8 +42,7 @@ func main() {
 
 func printCoinData(coin Crypto, chartData [][]float64, currency Currency) {
 	var style = lipgloss.NewStyle().
-		Bold(true).
-		MarginTop(1)
+		Bold(true)
 
 	fmt.Print(style.Render(coin.Name + " (" + coin.Symbol + "): "))
 
@@ -55,7 +54,6 @@ func printCoinData(coin Crypto, chartData [][]float64, currency Currency) {
 
 	style = lipgloss.NewStyle().
 		Background(lipgloss.Color(priceColor))
-
 	fmt.Println(style.Render(FormatPrice(currency.symbol, coin.Price)))
 
 	printChart(chartData)
@@ -112,7 +110,11 @@ func printChart(chart [][]float64) {
 
 	slc.DrawBraille()
 
-	fmt.Println(slc.View())
+	var style = lipgloss.NewStyle().
+		Foreground(lipgloss.Color("99")).
+		Margin(1)
+
+	fmt.Println(style.Render(slc.View()))
 }
 
 func printHelp() {
