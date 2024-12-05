@@ -21,7 +21,6 @@ require (
 	github.com/NimbleMarkets/ntcharts v0.2.0
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
 	github.com/charmbracelet/x/ansi v0.4.5 // indirect
-	github.com/guptarohit/asciigraph v0.7.3
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
