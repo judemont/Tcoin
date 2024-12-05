@@ -136,7 +136,7 @@ func getArgValue(args []string, shortFlag, longFlag string) string {
 func printHelp() {
 	fmt.Println(
 		`
-Usage: tcoin <crypto>
+Usage: tcoin <coin>
 
 Options:
  -h, --help 	 Display this help message

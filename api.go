@@ -63,6 +63,25 @@ func getChart(coinId string, period string) ([][]float64, error) {
 	return chartData, nil
 }
 
+func searchCoin(query string) ([]Crypto, error) {
+	url := BASE_API_URL + "/coins?name=" + query
+
+	response := apiCall(url)
+
+	var responseMap map[string]interface{}
+	json.Unmarshal(response, &responseMap)
+
+	if statusCode, ok := responseMap["statusCode"]; ok && statusCode != http.StatusOK {
+		return nil, errors.New(responseMap["message"].(string))
+	}
+
+	var coins []Crypto
+	if err := json.Unmarshal(response, &coins); err != nil {
+		return nil, err
+	}
+	return coins, nil
+}
+
 func apiCall(url string) []byte {
 	req, _ := http.NewRequest("GET", url, nil)
 
